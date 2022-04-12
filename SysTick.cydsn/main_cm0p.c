@@ -1,0 +1,42 @@
+/* ========================================
+ *
+ * Copyright YOUR COMPANY, THE YEAR
+ * All Rights Reserved
+ * UNPUBLISHED, LICENSED SOFTWARE.
+ *
+ * CONFIDENTIAL AND PROPRIETARY INFORMATION
+ * WHICH IS THE PROPERTY OF your company.
+ *
+ * ========================================
+*/
+#include "project.h"
+#include "timer.h"
+
+typedef _Bool boolean;
+int main(void)
+{
+    __enable_irq(); /* Enable global interrupts. */
+    /* Enable CM4.  CY_CORTEX_M4_APPL_ADDR must be updated if CM4 memory layout is changed. */
+    Cy_SysEnableCM4(CY_CORTEX_M4_APPL_ADDR); 
+
+    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+
+    for(;;)
+    {
+        if(countLED1 ==0) {
+            static boolean sLed1 = false;
+            countLED1 = 300;
+            Cy_GPIO_Write(pLed1_PORT,pLed1_NUM,sLed1);
+            sLed1 ^=1;
+        }
+        if(countLED2 == 0){
+            static boolean sLed2 = false;
+            countLED2 = 450;
+            Cy_GPIO_Write(pLed2_PORT,pLed2_NUM,sLed2);
+            sLed2 ^=1;
+            
+        }
+    }
+}
+
+/* [] END OF FILE */
